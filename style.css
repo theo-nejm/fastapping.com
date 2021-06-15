@@ -1,0 +1,114 @@
+/* IMPORTS =============================================== */
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@100;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+
+/* GENERAL  ============================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Big Shoulders Stencil Display', sans-serif;
+}
+
+html {
+    background: url(https://elitemidia.com/wp-content/uploads/2017/07/Background-4.jpg) no-repeat center top fixed;
+}
+
+/* HEADER ================================================ */
+
+#header {
+    display: inline-block;
+    width: 100vw;
+    height: 10vh;
+    background: #2e2e2e;
+
+    text-align: center;
+}
+
+#page-title {
+    margin: 2vh 0;
+    color: white;
+}
+
+#page-title span {
+    color: #f4c430;
+}
+
+/* MAIN ==================================================== */
+
+/* PLAY PART =============================================== */
+
+/* DISPLAY ================================================= */
+#words-display {
+    height: 16vh;
+    width: 80vw;
+    
+    margin: 6vh 10vw 3vh;
+    padding: 1vh 6vw;
+
+    border-radius: 1.6vw;
+    border: none;
+    outline: none;
+    
+    border-bottom: .7vh solid #f4c430;
+
+    resize: none;
+
+    font-size: 2.2rem;
+    color: black;
+
+    overflow-y: hidden;
+    
+    font-weight: 50000;
+}
+
+/* BOTTOM PLAY =================================================== */
+#bottom-play-container {
+    display: inline-flex;
+}
+
+#words-input {
+    height: 8vh;
+    width: 65vw;
+    margin-left: 10vw;
+    padding: 1vw;
+
+    border-radius: 1.6vw;
+    border: none;
+    outline: none;
+
+    font-size: 1.6rem;
+}
+
+#retry-button {
+    width: 10vw;
+    height: 8vh;
+    
+    background: rgba(255, 255, 255, 1);
+    
+    margin-left: 5vw;
+    
+    border-radius: 1.6vw;
+    
+    align-items: center;
+    justify-content: center;
+    padding: 2vh 2.5vw;
+
+    cursor: pointer;
+    transition-duration: .5s;
+}
+
+#retry-button:hover {
+    transform: rotate(-15deg);
+}
+
+#retry-icon {
+    height: 4vh;
+    width: 5vw;
+}
+
+/* WHILE PLAYING ===================================== */
+
+.right-word-atm {
+    background: rgba(0, 255, 0, .1)
+}
