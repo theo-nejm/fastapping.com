@@ -1,3 +1,4 @@
+
 /* IMPORTS =============================================== */
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@100;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
@@ -37,13 +38,18 @@ html {
 /* MAIN ==================================================== */
 
 /* PLAY PART =============================================== */
-
+#play-container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
 /* DISPLAY ================================================= */
 #words-display {
     height: 16vh;
     width: 80vw;
     
-    margin: 6vh 10vw 3vh;
+    margin: 1vh 10vw 3vh;
     padding: 1vh 6vw;
 
     border-radius: 1.6vw;
@@ -95,11 +101,11 @@ html {
     padding: 2vh 2.5vw;
 
     cursor: pointer;
-    transition-duration: .5s;
+    transition-duration: .3s;
 }
 
 #retry-button:hover {
-    transform: rotate(-15deg);
+    transform: rotate(-7.5deg);
 }
 
 #retry-icon {
@@ -109,6 +115,69 @@ html {
 
 /* WHILE PLAYING ===================================== */
 
-.right-word-atm {
-    background: rgba(0, 255, 0, .1)
+.timer {
+    padding-top: 0;
+    margin-top: 3vh;
+    color: white;
+    height: 8vh;
+    font-size: 3rem;
+    text-align: center;
+    align-items: center;
+}
+
+/* RESULTS ============================================ */
+
+#results-section {
+    overflow: hidden;
+}
+
+.results-container {
+    color: black;
+    background: white;
+    width: 50vw;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    margin: 3vh auto;
+    border-radius: 1.6vw;
+
+    transition-duration: 1s;
+}
+
+
+#ppm {
+    height: 8vh;
+    font-size: 6vh;
+    font-weight: 700;
+
+    text-align: center;
+
+    padding-top: 1vh;
+
+    background: rgb(46,46,46);
+    border-radius: 1.2vw 1.2vw 0 0;
+    border-bottom: .35vh solid rgb(46,46,46);
+    color: white;
+}
+
+#ppm-value {
+    color: #f4c430;
+}
+
+#extra-result-infos-container {
+    width: 100%;
+    height: 22vh;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin: 3vw;
+
+    font-size: 1.25rem;
+}
+
+.extra-result-infos {
+    color: black;
+    font-weight: bold;
 }
