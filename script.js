@@ -2,6 +2,7 @@
 
 const wordsDisplay = document.getElementById("words-display")
 const wordsInput = document.getElementById("words-input")
+const restartButton = document.getElementById("retry-button")
 
 let letterCounter = 0
 let arrayCounter = 0
@@ -9,13 +10,32 @@ let arrayCounter = 0
 let rightWordsCounter = 0
 let wrongWordsCounter = 0
 
-let toSortWords = ["arroz", "feijão", "batata", "macarrão", "feijoada", "macarronada", "gengibre", "banana", "maçã", "torresmo", "salada", "aipim", "alho", "peixe", "fritas", "picanha", "repolho", "maminha", "alcatra", "tabule", "alite", "tapioca", "pizza", "sushi", "açaí", "paçoca", "baião", "pamonha", "panelada", "pastel", "palmito", "sopa", "canja", "bife", "carne", "café", "buchada", "bolo", "chá", "quindim", "canjica", "cachaça", "queijo", "brigadeiro", "acerola", "pudim", "coxinha", "enroladinho", "refrigerante", "beirute", "chimarrão", "milho"]
+let newWordsArray = shuffleArray(allWords)
 
-let currentWord = toSortWords[arrayCounter]
+wordsDisplay.value = newWordsArray.join(" ")
 
-wordsDisplay.value = toSortWords.join(" ")
+let currentWord = newWordsArray[arrayCounter]
 
-// let currentWord = toSortWords[arrayCounter]
+// shuffles the array order
+function shuffleArray(array, difficultLevel) {
+    switch(difficultLevel) {
+        case 1: 
+            "" 
+            break
+        case 2: 
+            "" 
+            break
+        case 3: 
+            "" 
+            break
+        default: 
+        for (let index = array.length - 1; index > 0; index--) {
+            const aleatoryElement = Math.floor(Math.random() * (index + 1));
+            [array[index], array[aleatoryElement]] = [array[aleatoryElement], array[index]];
+        }
+        return array;
+    }
+}
 
 // clears the input
 function clearInput(input) {
@@ -73,6 +93,24 @@ function resetLetterCounter() {
     return letterCounter
 }
 
+// resets array counter -> when the game restarts 
+function resetArrayCounter() {
+    arrayCounter = 0
+    return arrayCounter
+}
+
+// resets the right words counter
+function resetRightWordsCounter() {
+    rightWordsCounter = 0
+    return rightWordsCounter
+}
+
+// resets the wrong words counter
+function resetWrongWordsCounter() {
+    wrongWordsCounter = 0
+    return wrongWordsCounter
+}
+
 // updates display content 
 function updateDisplayContent(displayContent) {
     displayContent.shift()
@@ -80,8 +118,8 @@ function updateDisplayContent(displayContent) {
 }
 
 // updates current word
-function updateCurrentWord(toSortWords) {
-    currentWord = toSortWords[0]
+function updateCurrentWord(wordsArray) {
+    currentWord = wordsArray[0]
     return currentWord
 }
 
@@ -120,27 +158,35 @@ function showResults(rightWordsCounter, wrongWordsCounter, totalWords) {
         
         <div id="extra-result-infos-container">
             <div class="extra-result-infos">
-                Palavras corretas: ${rightWordsCounter}
+                <p>Palavras corretas: <span class="result-info" id="right-words">${rightWordsCounter}</span></p>
             </div>
             
             <div class="extra-result-infos">
-                Palavras erradas: ${wrongWordsCounter}
+                <p>Palavras erradas: <span class="result-info" id="wrong-words">${wrongWordsCounter}</span></p>
             </div>
 
             <div class="extra-result-infos">
-                Precisão: ${precision.toFixed(2)}%
+                <p>Precisão: <span class="result-info" id="precision">${precision.toFixed(2)}%</span></p>
             </div>
         </div>
     `
 
     resultsSection.appendChild(resultsContainer)
+    
+}
+
+// clear the results of typing test (used on restart)
+function clearResults() {
+    resultsContainer = document.querySelector(".results-container")
+    if(resultsContainer != null) {
+        resultsContainer.classList.add("hidden")
+    }
 }
 
 // [END] DISPLAY, INPUT AND INTERACTIONS ===============================
 
 function startTimer(duration, display) {
     let timer = duration, minutes, seconds;
-    console.log(timer)
     let intervalSetting = setInterval(function () {
         minutes = parseInt(timer / 60, 10);
         minutes = minutes < 10 ? "0" + minutes : minutes;
@@ -148,18 +194,23 @@ function startTimer(duration, display) {
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
         display.innerText = minutes + ":" + seconds;
-        timer == 0 ? window.clearInterval(intervalSetting) : ""
+        
+        timer == 0 ? (
+            window.clearInterval(intervalSetting),
+            endGame()
+        ) : ""
 
         timer-- < 0 ? timer = duration : ""
         
         if(timer == 0) {
-            endGame()
+            
         }
     }, 1000)
 }
 
 // starts the game
-function startGame() {
+function startGame(sortedWords) {
+    let newWordsArray = sortedWords.slice(0, sortedWords.length)
     wordsInput.addEventListener("keydown", event => {
         if (arrayCounter == 0 && letterCounter == 0) {
             startTimer(60, document.querySelector('.timer'))
@@ -167,8 +218,8 @@ function startGame() {
         if (verifySpacePress(event)) {
             compairWrotenToRight(currentWord, verifyWrotenWord())
             increaseArrayCounter()
-            updateDisplayContent(toSortWords)
-            updateCurrentWord(toSortWords, arrayCounter)
+            updateDisplayContent(newWordsArray)
+            updateCurrentWord(newWordsArray)
             resetLetterCounter()
             clearInput(wordsInput)
         } else if (verifyBackspacePress(event)) {
@@ -188,4 +239,14 @@ function endGame() {
     showResults(rightWordsCounter, wrongWordsCounter, (rightWordsCounter + wrongWordsCounter))
 }
 
-startGame()
+// restarts the game
+function restartGame(wordsDisplay, sortedWords) {
+    clearResults()
+    if(resultsContainer == null) {
+        location.reload() 
+    } else {
+        setInterval(()=>location.reload(), 2001)
+    }
+}
+
+startGame(allWords)

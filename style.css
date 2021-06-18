@@ -128,22 +128,66 @@ html {
 /* RESULTS ============================================ */
 
 #results-section {
+    width: 100vw;
+    height: 50vh;
+
     overflow: hidden;
+    position: relative;
+
+    display: flex;
+    align-content: center;
+    justify-content: center;
 }
 
 .results-container {
     color: black;
     background: white;
     width: 50vw;
-    height: 30vh;
-    display: flex;
-    flex-direction: column;
+    height: 40vh;
     margin: 3vh auto;
     border-radius: 1.6vw;
 
+    animation: show-section 1.25s ease-in-out;
     transition-duration: 1s;
+    position: absolute;
 }
 
+.hidden {
+    animation: hide-section 2s ease-in-out;
+    
+    transform: translateY(-45vh) translateX(-5vw);
+}
+
+@keyframes show-section {
+    0% {
+        transform: translateY(-45vh);
+    }
+    60% {
+        transform: translateY(3vh);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes hide-section {
+    0% {
+        transform: translateY(0);
+    }
+    20% {
+        transform: translateY(0) translateX(-7vw);
+    }
+    35% {
+        transform: translateY(0) translateX(-7vw);
+    }
+    40% {
+        transform: translateX(-7vw) translateY(1vh);
+    }
+    100% {
+        transform: translateX(-7vw) translateY(-45vh);
+        display: none;
+    }
+}
 
 #ppm {
     height: 8vh;
@@ -166,18 +210,46 @@ html {
 
 #extra-result-infos-container {
     width: 100%;
-    height: 22vh;
+    height: 32vh;
+    padding: 3vh 3vw;
+    font-size: 1.25rem;
     
+    border-radius: 0 0 1.6vw 1.6vw;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-    margin: 3vw;
-
-    font-size: 1.25rem;
 }
 
 .extra-result-infos {
     color: black;
     font-weight: bold;
+}
+
+.extra-result-infos p {
+    display: flex;
+    flex-direction:row;
+    padding-right: 2vw;
+    justify-content: space-between;
+    
+    border-bottom: .3vh solid #e3e3e3
+}
+
+.result-info {
+    font-weight: 900;
+    font-size: calc(100% * 1.5);
+
+    margin-top: .5vh;
+}
+
+#right-words {
+    color: green;
+}
+
+#wrong-words {
+    color: red;
+}
+
+#precision {
+    color: #f4c430;
 }
