@@ -253,3 +253,70 @@ html {
 #precision {
     color: #f4c430;
 }
+
+/* GRAPHIC ===================================== */
+
+.graphic-container {
+    position: absolute;
+    top: 35vh;
+    height: auto;
+    width: 80vw;
+    display: inline-flex;
+    background: white;
+    border-radius: 1vw;
+    margin: 17.5vh 10vw;
+    overflow: hidden;
+    overflow-x:auto;
+
+    justify-content: space-between;
+    padding: 2vh 4vw;
+
+    box-shadow: 0 0 5px white;
+}
+
+.graphic-container::-webkit-scrollbar {
+    height: 1.5vh;
+    border: 1px solid #2e2e2e;
+}
+
+.graphic-container::-webkit-scrollbar-thumb {
+    background: #2e2e2e;
+    border-radius: 1.6vw;
+}
+
+.table {
+    position: relative;
+    height: auto;
+    width: 5%;
+    padding: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+
+    border-collapse: collapse;
+    margin: -1vh .3vw;
+}
+
+.table td{
+    height: .75vh;
+    width: 4vw;
+    border-collapse: collapse;
+}
+
+.table tr {
+    margin: .2vw;
+    height: .75vh;
+    width: 4vw;
+    background: #2e2e2e;
+}
+
+.words-writen {
+    font-size: 1.1rem;
+    background: #2e2e2e;
+    width: 25px !important;
+    height: 25px !important;
+    margin-bottom: .3vh !important;
+    text-align: center;
+    color: white;
+    padding: .25vw !important;
+}

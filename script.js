@@ -201,10 +201,6 @@ function startTimer(duration, display) {
         ) : ""
 
         timer-- < 0 ? timer = duration : ""
-        
-        if(timer == 0) {
-            
-        }
     }, 1000)
 }
 
@@ -250,3 +246,35 @@ function restartGame(wordsDisplay, sortedWords) {
 }
 
 startGame(allWords)
+
+/* GRAPHIC =========================================*/
+const container = document.querySelector('.graphic-container')
+
+const array = [65, 70, 85, 80, 60, 70, 100, 120]
+
+function createGraphic(array, container) {
+    let counter = 0
+    array = array.map(item => {
+        item = item / 5
+        console.log(Number(item.toFixed(0)))
+        return Number(item.toFixed(0))
+    })
+    while(counter < array.length) {
+        const table = document.createElement('table')
+        table.classList.add('table')
+        for(let i = 0; i < array[counter]; i++) {
+            const tr = document.createElement('tr')
+            tr.innerHTML = `<td></td>`
+            table.appendChild(tr)
+            container.appendChild(table)
+        }
+        const wordsWritenRow = document.createElement('tr');
+        wordsWritenRow.classList.add('words-writen')
+
+        wordsWritenRow.innerHTML = array[counter] * 5
+        table.appendChild(wordsWritenRow)
+        counter++
+    }
+}
+
+createGraphic(array, container)
