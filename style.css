@@ -13,6 +13,8 @@
 
 html {
     background: url(https://elitemidia.com/wp-content/uploads/2017/07/Background-4.jpg) no-repeat center top fixed;
+    background-size: 120vw;
+    overflow-x: hidden;
 }
 
 /* HEADER ================================================ */
@@ -116,13 +118,29 @@ html {
 /* WHILE PLAYING ===================================== */
 
 .timer {
-    padding-top: 0;
+    padding-top: 2vh;
     margin-top: 3vh;
     color: white;
     height: 8vh;
     font-size: 3rem;
     text-align: center;
     align-items: center;
+}
+
+.see-evolution-btn button {
+    background: none;
+    border: none;
+    
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+
+    margin-left: 12vw;
+
+    height: auto;
+    width: auto;
+
+    font-size: 1.2rem;
 }
 
 /* RESULTS ============================================ */
@@ -256,22 +274,76 @@ html {
 
 /* GRAPHIC ===================================== */
 
-.graphic-container {
+.results-graphic-container {
     position: absolute;
-    top: 35vh;
+
+    height: auto;
+    width: 90vw;
+    
+    top: 55vh;
+    left: 5vw;
+    
+    overflow-y: hidden;
+    overflow-x:visible;
+}
+
+.results-graphic {
+    background: white;
+    height: auto;
+    width: 80vw;
+    margin-left: 5vw;
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    border-radius: 1.6vw;
+
+    align-items: center;
+    transform: translateY(-70vh);
+    transition-duration: 2s;
+}
+
+.results-graphic p {
+    font-size: 2.4rem;
+    margin: 1vh;
+    font-weight: bold;
+
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.centered-span {
+    text-align: center;
+    width: 77.5vw;
+}
+
+.right-span {
+    font-size: 1.6rem;
+    color: red;
+    cursor: pointer;
+}
+
+.results-graphic-shown {
+    transform: translateY(0) !important;
+}
+
+.graphic-container {
+    position: relative;
     height: auto;
     width: 80vw;
     display: inline-flex;
     background: white;
-    border-radius: 1vw;
-    margin: 17.5vh 10vw;
     overflow: hidden;
     overflow-x:auto;
 
     justify-content: space-between;
     padding: 2vh 4vw;
 
-    box-shadow: 0 0 5px white;
+    box-shadow: 0 0 3px black;
+    transform: scale(1.025);
+
+    margin: 1vh;
 }
 
 .graphic-container::-webkit-scrollbar {
@@ -313,10 +385,21 @@ html {
 .words-writen {
     font-size: 1.1rem;
     background: #2e2e2e;
-    width: 25px !important;
-    height: 25px !important;
+    width: 30px !important;
+    height: 30px !important;
     margin-bottom: .3vh !important;
     text-align: center;
+    
     color: white;
-    padding: .25vw !important;
+    padding: 5px !important;
+}
+
+.graphic-extra-data {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 10vw;
+
+    font-size: 1.2rem;
 }

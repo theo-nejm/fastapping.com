@@ -3,6 +3,7 @@
 const wordsDisplay = document.getElementById("words-display")
 const wordsInput = document.getElementById("words-input")
 const restartButton = document.getElementById("retry-button")
+const graphic = document.querySelector('.results-graphic')
 
 let letterCounter = 0
 let arrayCounter = 0
@@ -16,6 +17,15 @@ wordsDisplay.value = newWordsArray.join(" ")
 
 let currentWord = newWordsArray[arrayCounter]
 
+const resultsListJSON = localStorage.getItem('results-list')
+
+let resultsList = new Array()
+
+if(!resultsListJSON) {
+    resultsList = []
+} else {
+    resultsList = JSON.parse(resultsListJSON)
+}
 // shuffles the array order
 function shuffleArray(array, difficultLevel) {
     switch(difficultLevel) {
@@ -173,6 +183,7 @@ function showResults(rightWordsCounter, wrongWordsCounter, totalWords) {
 
     resultsSection.appendChild(resultsContainer)
     
+    
 }
 
 // clear the results of typing test (used on restart)
@@ -233,12 +244,14 @@ function startGame(sortedWords) {
 // ends the game
 function endGame() {
     showResults(rightWordsCounter, wrongWordsCounter, (rightWordsCounter + wrongWordsCounter))
+    saveResult(rightWordsCounter + (wrongWordsCounter / 2))
 }
 
 // restarts the game
 function restartGame(wordsDisplay, sortedWords) {
     clearResults()
-    if(resultsContainer == null) {
+    clearGraphic()
+    if(resultsContainer == null && graphic.classList.contains('results-graphic-shown')) {
         location.reload() 
     } else {
         setInterval(()=>location.reload(), 2001)
@@ -247,22 +260,28 @@ function restartGame(wordsDisplay, sortedWords) {
 
 startGame(allWords)
 
-/* GRAPHIC =========================================*/
+// SAVE RESULTS ======================================
+const saveResult = (result) => {
+    resultsList.push(result)
+    
+
+    let resultsListJSON = JSON.stringify(resultsList)
+    localStorage.setItem('results-list', resultsListJSON)
+}
+
+// GRAPHIC ===========================================
 const container = document.querySelector('.graphic-container')
 
-const array = [65, 70, 85, 80, 60, 70, 100, 120]
-
-function createGraphic(array, container) {
+function createGraphic(graphicArray, container) {
     let counter = 0
-    array = array.map(item => {
+    graphicArray = graphicArray.map(item => {
         item = item / 5
-        console.log(Number(item.toFixed(0)))
-        return Number(item.toFixed(0))
+        return Number(item)
     })
-    while(counter < array.length) {
+    while(counter < graphicArray.length) {
         const table = document.createElement('table')
         table.classList.add('table')
-        for(let i = 0; i < array[counter]; i++) {
+        for(let i = 0; i < graphicArray[counter]; i++) {
             const tr = document.createElement('tr')
             tr.innerHTML = `<td></td>`
             table.appendChild(tr)
@@ -271,10 +290,41 @@ function createGraphic(array, container) {
         const wordsWritenRow = document.createElement('tr');
         wordsWritenRow.classList.add('words-writen')
 
-        wordsWritenRow.innerHTML = array[counter] * 5
+        wordsWritenRow.innerHTML = graphicArray[counter] * 5
         table.appendChild(wordsWritenRow)
         counter++
     }
 }
 
-createGraphic(array, container)
+function addExtraData() {
+    let highestPPM = 0;
+    let lowestPPM = 0;
+    let ppmSum = 0;
+    const resultsCount = resultsList.length > 0 ? resultsList.length : 0;
+
+    resultsList.forEach(item => {
+        resultsList == item == 0 ? (highestPPM = item, lowestPPM = item) : ''
+        
+        highestPPM = item >= highestPPM ? item : highestPPM
+        lowestPPM = item <= lowestPPM ? item : lowestPPM
+        ppmSum += item
+    })
+    const averagePPM = resultsCount > 0 ? ppmSum / resultsCount : 0;
+
+    document.getElementById('highest-ppm').innerHTML = highestPPM
+    document.getElementById('lowest-ppm').innerHTML = lowestPPM
+    document.getElementById('average-ppm').innerHTML = averagePPM.toFixed(2)
+    document.getElementById('performed-tests').innerHTML = resultsCount
+}
+
+addExtraData()
+
+function showGraphic() {
+    graphic.classList.add('results-graphic-shown')
+}
+
+function clearGraphic() {
+    graphic.classList.remove('results-graphic-shown')
+}
+
+window.addEventListener('load', createGraphic(resultsList, container))
