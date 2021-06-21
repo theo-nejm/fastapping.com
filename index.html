@@ -16,6 +16,9 @@
     <main>
         <div id="play-container">
             <div class="timer">01:00</div>
+            <div class="see-evolution-btn" onclick="showGraphic()">
+                <button type="button">Ver minha evolução</button>
+            </div>
             <textarea name="" 
             id="words-display" 
             cols="30" 
@@ -24,19 +27,34 @@
             </textarea>
             <div id="bottom-play-container">
                 <input type="text" id="words-input" placeholder="Digite...">
-                <div id="retry-button"><img src="assets/retry-icon.svg" id="retry-icon"></div>
+                <div id="retry-button" onclick="restartGame()"><img src="assets/retry-icon.svg" id="retry-icon"></div>
             </div>
         </div>
     
         <section id="results-section">
 
         </section>
+        <div class="results-graphic-container">
+            <section class="results-graphic">
+                <p><span class="centered-span">Minha evolução</span> <span class="right-span" onclick="clearGraphic(), addExtraData()">x</span></p>
+                <div class="graphic-container">
+                    
+                </div>
+                <div class="graphic-extra-data">
+                    <h3>Maior PPM: <span id="highest-ppm"></span></h3>
+                    <h3>Menor PPM: <span id="lowest-ppm"></span></h3>
+                    <h3>Média PPM: <span id="average-ppm"></span></h3>
+                    <h3>Testes realizados: <span id="performed-tests"></span></h3>
+                </div>
+            </section>
+        </div>
     </main>
     
     <footer>
 
     </footer>
 
+    <script src="arrays.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
